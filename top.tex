@@ -1,0 +1,84 @@
+\documentclass{article}
+\input{preamble}
+
+\title{Ko\c{c} University \\COMP547 Deep Unsupervised Learning\\ Lecture Notes\footnote{Instructions borrowed from Andreas Geiger from his notes for his Deep Learning class.}}
+\author{Aykut Erdem}
+\date{February 28, 2021}
+
+\begin{document}
+
+\maketitle
+
+% set this counter to x-1 where x is the number of the lecture you are writing notes for
+\setcounter{section}{0}
+
+\section{Instructions}
+
+This is the official template for the lecture notes of the COMP547 Deep Unsupervised Learning class in Spring 2021 at Ko\c{c} University. We will continuously consolidate and compile all lecture notes into a single manuscript. The goal is to obtain a manuscript that is comprehensive and mathematically precise to complement the lecture slides and guide the reader/students in better understanding the course materials. These lecture notes should act as a complement to the lecture slides and therefore do not need to necessarily comprise all figures from the lecture slides. They should, however, provide a concise mathematical description of all concepts that have been discussed in the lectures and include the most important illustrations for understanding those. As a rough guideline, the notes for each lecture should be between 8 and 15 pages. Note that every student must submit his/her lecture notes individually, \ie, this task cannot be done in groups. The assignment of students to lecture is done in the beginning of the class, you will be notified which lecture has been assigned to you via email. Note that you must submit the notes for your lecture via Blackboard within 10 days of the official date where the lecture was held.
+
+To start notes for your assigned lecture, please carefully read these instructions. Then make a copy (Menu $\rightarrow$ Copy Project) of this template, erase the instructions and start editing -- directly in Overleaf or using another \LaTeX~editor of your choice. If you haven't used Overleaf or \LaTeX~before, we highly recommend you to use Overleaf instead of a stand-alone Latex editor, and to read \url{https://www.overleaf.com/learn} to get started. \LaTeX~is easy to learn, in particular when using the online editor Overleaf, and it is a useful typesetting tool which will become your friend for writing project reports, Bachelor's or Master's theses. After you are done with writing your lecture notes, download them as a zip file (Menu $\rightarrow$ Source), and submit them via Blackboard.
+
+When you have read this far, I am assuming that you are familiar with the basics of \LaTeX~and the usage of the Overleaf editor. In particular, you know the basic \LaTeX~commands and know the relevant Overleaf shortcuts that help you editing your notes, \eg, the small arrows in the middle are useful for jumping between corresponding locations in the source and pdf file, \etc. For writing your lecture notes, please orient yourself at the structure of the lecture and the lecture slides. Use the exact same notation wherever possible. All formulas on the lecture slides must appear in the lecture notes and must be explained. Make sure to describe the meaning of each mathematical symbol as well as the relevant domains, \eg, $\bx \in \nR^2$ is a vector in 2D space. You may add additional details and derivations if you find this useful for understanding the concepts discussed in the lecture. You can use Mathpix Snip tool (\url{https://mathpix.com}) to grab equations from the lecture slides if needed. In the following, we provide some instructions/best practices for writing your lecture notes. Please also have a look at the current status of the combined lecture notes document to get an idea and ensure consistency with previous sections.
+
+\subsection{Subsections}
+\label{sec:subsections}
+
+Each lecture will become a section in this document. To further structure the notes for your lecture, use \texttt{subsections}, where each subsection is numbered exactly the same way as it is in the lecture slides: the section title of lecture 1 should read ``1 Introduction'' and the subsection title of unit 1.2 of lecture 1 should read ``1.2 History of Deep Learning'', \etc. Use the command \texttt{setcounter} in the beginning of this document to adjust the lecture number. Add a label with the name (in the format: \texttt{sec:sectionname}) of each section directly after the section such that you are able to refer to it when needed, \eg, \secref{sec:subsections} or \secref{sec:subsubsections}.
+
+\subsubsection{Subsubsections}
+\label{sec:subsubsections}
+
+Use \texttt{subsubsections} to provide a finer granularity to your lecture notes where necessary.
+
+\subsection{Illustrations}
+
+Add illustrations that you like to include into your lecture notes as compressed jpg or png to the folder \texttt{figures/your\_lecture}. Use figure environments with captions and labels. It is a good idea to provide a short description in bold followed by a longer multi-sentence description in regular text as caption as illustrated below. Reference your figures via the \texttt{figref} command (\eg, \figref{fig:universe}) from the main text.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\linewidth]{figures/universe}
+\caption{\textbf{The Universe.} An illustration of the universe. It is beautiful.}
+\label{fig:universe}
+\end{figure}
+
+\subsection{Citations}
+
+Add any paper/journal references which you like to use to \texttt{bibliography.bib}. You can use \url{https://dblp.org/} to find the bibliographic information for papers. Only include the most relevant information (title, authors, year, conference, for journals: journal, volume, number pages) in the bibtex entry. Use shortcut strings for conferences and journals as defined in \texttt{bibliography\_strings.bib}. Inspect the references in \texttt{bibliography.bib} for examples. You can then cite your references using the \texttt{cite} command \cite{Rumelhart1986NATURE}.
+
+\subsection{Equations}
+
+Use a mix of inline math $a=1$ and display math equations
+%
+\begin{equation}
+    b = 2
+    \label{eq:b_equals_2}
+\end{equation}
+%
+as you find appropriate. It is a good idea to use inline math equations for short equations that are less important, to specify the domain of a variable or to refer to functions or parameters in the main text. Display math equations (separate line with line number) should be used for important definitions, derivations or longer mathematical expressions. Use numbered equations for display math equations as above. Add labels for referencing them using the \texttt{eqnref} command, \eg, \eqnref{eq:b_equals_2}. Use the \texttt{align} command for multi-line equations. Inspect the sources of the lecture slides (provided in ILIAS) for examples.
+
+\subsection{Preamble / Shortcuts}
+
+Before starting to write, carefully inspect the file \texttt{preamble.tex}. You will find many shortcuts to important commands which will help you in writing legible \LaTeX~source code. Do not invent new commands (\eg, commands for entire mathematical expressions) unless absolutely necessary, but rather use those provided in \texttt{preamble.tex}. Here are some examples:
+
+\begin{itemize}
+    \item Vectors and matrices are often expressed using bold face notation: $\bA \bx = \by$
+    \item Domains or expectations are often expressed using blackboard characters: $\nR^2, \nZ, \nC, \nE_{x\sim P}[f(x)]$
+    \item Sets are sometimes expressed using calligraphic characters: $\cS,\cM$
+    \item Probability distributions are often expressed using calligraphic characters: $x \sim \cN(\mu,\sigma)$
+    \item The preamble defines shortcuts for argmin/argmax commands, traces and variance operators, \eg:
+    \begin{equation}
+        x_{min}=\argmin_x x^2 \qquad x_{max}=\argmax_x x^2 \qquad x = \Tr(\bX)
+    \end{equation}
+    \item Furthermore, there are some shortcuts defined for the most important abbreviations: \eg, \ie, \cf, \etc, \vs, \wrt, \dof, \etal, \iid. Make sure to use those commands.
+    \item Add new commands to the preamble only if really necessary and add a comment on why you have introduced them. This will help the TAs consolidating the files. But please try to stick with the overall format and structure of the template as much as possible.
+\end{itemize}
+
+\subsection{Additional Packages}
+
+Add additional packages only if really needed. Make sure that these packages are compatible with earlier chapters of the lecture notes (\eg, do not include additional or conflicting algorithm environments).
+
+% bibliography
+\bibliographystyle{plain}
+\bibliography{bibliography_strings,bibliography_custom}
+
+\end{document}
