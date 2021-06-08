@@ -26,15 +26,14 @@ later to be used for other downstream tasks. To do that we will
 answer the following questions.
  
 \begin{itemize}
-   \item How do learn rich and useful features from
-   raw unlabeled data that can be
-   useful for several downstream tasks?
-   \item What are the various pretext (proxy)
-   tasks that can be used to learn
-   representations from unlabeled data?   
-   \item How can we improve data-efficiency
-   and performance of downstream tasks
-   with a good pre-trained network?
+   \item How can we extract rich and valuable 
+   features from unlabeled raw data in order to use 
+   them in a variety of downstream tasks? 
+   \item What are some examples of pretext (proxy) tasks 
+   for learning representations from unlabeled data?   
+   \item Can data-efficiency
+   and performance be improved for downstream tasks
+   by using good pre-trained network?
 \end{itemize}
  
 \subsection{Motivation and Definition}
@@ -94,7 +93,7 @@ Self-supervised learning is also called Predictive learning.
 The name makes sense if one has to consider the following cases:
  
 \begin{itemize}
-   \item Predict any part of the input from any other part
+   \item Predict a portion of the input from other parts
    \item Predict the future from the past
    \item Predict the future from the recent past
    \item Predict the past from the present
@@ -102,8 +101,8 @@ The name makes sense if one has to consider the following cases:
    \item Predict the occluded from the visible
 \end{itemize}
  
-\textbf{As a generalization: Pretend there is a part of the input
-you don't know and predict that}
+\textbf{As a generalization: Discard some part of the data and 
+try to predict that by using remaning parts.}
  
 \textbf{What is it good for?}
 \begin{itemize}
@@ -188,22 +187,19 @@ Prominent and pioneer paper for this task is
 \begin{figure}[H]
    \centering
    \includegraphics[width=0.8\linewidth]{figures/inpainting.png}
-   \caption{ Qualitative illustration of the task.
-   Given an im-age with a missing region (a),
-   a human artist has no trouble inpainting  it  (b).
-   Automatic  inpainting 
-   using  our context encoder trained
-   with L2 reconstruction loss
-   is shown in (c),
-   and using both L2 and adversarial losses in (d)}
+   \caption{ illustration of the image inpainting task.
+   image that has a missing region (a),
+   human drawing of the missing region (b).
+   Inpaing with reconstruction loss(c),
+   and Inpainting with both reconstruction and adverserial loss(d)}
    \end{figure}
  
    Context Encoder can be seen in figure 4.
-   The context image is passed through
-   the encoder to obtain features which are
-   connected to the decoder using
-   channel-wise fully-connected layer.
-   The decoder then produces the missing regions in the image.
+   The encoder receives the context image 
+   and extracts features, 
+   which are then fed to the decoder through 
+   a channel-wise fully-connected layer.
+   The decoder later creates the image's missing parts. 
  
 \begin{figure}[H]
        \centering
@@ -241,20 +237,21 @@ and the purpose of this network is to reconstruct the other views.
 \begin{figure}[H]
    \centering
    \includegraphics[width=0.8\linewidth]{figures/cross-channel-ae.png}
-   \caption{Traditional  vs  Split-Brain  Autoencoder  architectures.
-   (top)Autoencoders learn feature representation F
-   by learning to reconstruct input dataX.
-   (bottom)The proposed split-brain autoencoder
-   is composed of two disjoint sub-networks
-   F1, F2, each trained to predict one
-   data subset from another, changing  the  problem 
-   from reconstruction to prediction.
-   The split-brain representation F
-   is formed by concatenating the two sub-networks,
-   and achieves strong transfer
-   learning performance.
-   The model is publicly available
-   on https://richzhang.github.io/splitbrainauto.}
+   \caption{
+      Autoencoder architectures: traditional vs. split-brain
+      (at the top)
+      By learning to reconstruct input dataX,
+      autoencoders learn feature representation F.
+      (at the bottom)
+      The proposed split-brain autoencoder is made up of 
+      two disjoint sub-networks F1 and F2,
+      each of which has been trained to predict one
+      data subset from another,
+      updating the task from reconstruction
+      to prediction. 
+      Concatenating the two sub-networks results 
+      in the split-brain representation F,
+      which has good transfer learning performance. }
    \label{fig:split-brain}
    \end{figure}
  
@@ -471,8 +468,9 @@ What makes it contrastive is the usage of contrastive loss.
 \begin{figure}[H]
    \centering
    \includegraphics[width=0.8\linewidth]{figures/tsne_cpc_speech.png}
-   \caption{t-SNE visualization of audio (speech) representations for
-   a subset of 10 speakers (out of 251). Every color represents a different speaker}
+   \caption{Audio (speech) representations for
+   a subset of 10 speakers visualized using t-SNE (out of 251).
+   Each color corresponds to a distinct speaker. }
    \label{fig:cpc_speech}
 \end{figure}
  
